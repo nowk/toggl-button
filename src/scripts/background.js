@@ -853,7 +853,7 @@ TogglButton = {
       onLoad: function (xhr) {
         TogglButton.$user = null;
         TogglButton.updateTriggers(null);
-        localStorage.setItem('userToken', null);
+        localStorage.removeItem('userToken');
         sendResponse({success: (xhr.status === 200), xhr: xhr});
         if (xhr.status === 200) {
           TogglButton.setBrowserActionBadge();
