@@ -48,6 +48,7 @@ Add Toggl one-click time tracking to popular web tools.
   - [Help Scout][36]
   - [Intercom][95]
   - [JIRA (InCloud)][13]
+  - [Kanban-chi][102]
   - [Kanbanery][57]
   - [LiquidPlanner][69]
   - [MantisHub][73]
@@ -246,3 +247,4 @@ Don't know how to start? Just check out the [user requested services][98] that h
 [99]: https://github.com/toggl/toggl-button/pulls
 [100]: https://github.com/toggl/toggl-button/wiki/Where-can-I-find-the-Button%3F
 [101]: http://processwire.com/
+[102]: http://www.kanbanchi.com/
