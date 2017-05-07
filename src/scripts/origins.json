@@ -207,6 +207,11 @@
     "name": "Jquery Bugs",
     "file": "trac.js"
   },
+  "kanban-chi.appspot.com": {
+    "url": "*://kanban-chi.appspot.com/*",
+    "name": "Kanban-chi",
+    "file": "kanban-chi.js"
+  },
   "kanbanery.com": {
     "url": "*://*.kanbanery.com/*",
     "name": "Kanbanery"
