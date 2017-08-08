@@ -8,6 +8,11 @@
     "url": "*://web.any.do/*",
     "name": "Anydo"
   },
+  "app.zenhub.com": {
+    "url": "*://app.zenhub.com/*",
+    "name": "zenhub.js",
+    "file": "zenhub.js"
+  },
   "asana.com": {
     "url": "*://app.asana.com/*",
     "name": "Asana"
