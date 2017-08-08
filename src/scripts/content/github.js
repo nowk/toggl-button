@@ -2,38 +2,46 @@
 /*global $: false, document: false, togglbutton: false*/
 'use strict';
 
-togglbutton.render('#partial-discussion-sidebar', {observe: true}, function (elem) {
-  var div, link, description,
-    numElem = $('.gh-header-number'),
-    titleElem = $('.js-issue-title'),
-    projectElem = $('h1.public strong a, h1.private strong a'),
-    existingTag = $('.discussion-sidebar-item.toggl');
+togglbutton.render('#partial-discussion-sidebar:not(.toggl)', {observe: true}, function (elem) {
+  var div = createTag("div", "discussion-sidebar-item");
+  var h1  = createTag("h1");
+  h1.innerText = "Toggl Timer";
+  h1.setAttribute("style", "font-size: 1em; margin-bottom: 16px;")
 
-  // Check for existing tag, create a new one if one doesn't exist or is not the first one
-  // We want button to be the first one because it looks different from the other sidebar items
-  // and looks very weird between them.
+  div.appendChild(h1); // add h1 to div
 
-  if (existingTag) {
-    if (existingTag.parentNode.firstChild.classList.contains('toggl')) {
-      return;
+  var repo    = $("a", $('[itemprop="name"]')).getAttribute("href").replace(/^\//, "");
+  var title   = $(".js-issue-title").textContent.trim();
+  var issueNo = $(".gh-header-number").textContent.trim().replace(/^#/, "");
+
+  // support zenhub and multiple repos
+  var zenhubTitle = $(".zh-issueviewer-title-item");
+  if (zenhubTitle) {
+    var split = zenhubTitle.textContent.trim().split("#");
+    repo = split[0];
+
+    // just in case we don't get the issue number from the selector above
+    if (!!!issueNo) {
+      issueNo = split[1];
     }
-    existingTag.parentNode.removeChild(existingTag);
   }
 
-  description = titleElem.textContent;
-  if (numElem !== null) {
-    description = numElem.textContent + " " + description.trim();
+  // check
+  if (issueNo === null || title === null || repo === null) {
+    return;
   }
 
-  div = document.createElement("div");
-  div.classList.add("discussion-sidebar-item", "toggl");
-
-  link = togglbutton.createTimerLink({
+  var link = togglbutton.createTimerLink({
     className: 'github',
-    description: description,
-    projectName: projectElem && projectElem.textContent
+    description: "["+repo+"#"+issueNo+"] " + title
   });
 
   div.appendChild(link);
-  elem.prepend(div);
+
+  // NOTE this does not always put it at the top when other extensions compete
+  // for it, eg. Zenhub
+  // that is why we setTimeout...
+  setTimeout(function() {
+    elem.prepend(div);
+  }, 200);
 });
